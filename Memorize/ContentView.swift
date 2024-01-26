@@ -23,8 +23,7 @@ struct ContentView: View {
 
 #Preview {
     CardView(isFaceUp: true)
-        .foregroundColor(.orange)
-        .imageScale(.small)
+        .foregroundColor(.blue)
         .padding()
 }
 
