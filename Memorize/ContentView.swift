@@ -22,27 +22,37 @@ struct ContentView: View {
 }
 
 #Preview {
-    CardView(isFaceUp: true)
-        .foregroundColor(.blue)
-        .padding()
+    ContentView()
 }
 
-
+// Views are immutable
 struct CardView: View {
-    var isFaceUp: Bool = false
+//    Temporary state, not actual logic
+    @State var isFaceUp: Bool = false
     var body: some View {
+//        let is for constants
+//        let base: RoundedRectangle = RoundedRectangle(cornerRadius: 12)
+        let base = RoundedRectangle(cornerRadius: 12)
+          
+//        Trailing closure syntax
+//        ZStack(alignment: .top) {
+//            /*@START_MENU_TOKEN@*/Text("Placeholder")/*@END_MENU_TOKEN@*/
+//        })
+        
+//        Old fashioned
         ZStack(content: {
             if isFaceUp {
-                RoundedRectangle(cornerRadius: 12)
-                    .foregroundColor(.white)
-                RoundedRectangle(cornerRadius: 12)
-                    .strokeBorder(lineWidth: 2)
+                base.fill(.white)
+                base.strokeBorder(lineWidth: 2)
                 Text("👻").font(.largeTitle)
             } else {
-                RoundedRectangle(cornerRadius: 12)
+                base.fill()
             }
             
-        })
+        }).onTapGesture {
+            isFaceUp.toggle()
+//            isFaceUp = !isFaceUp also works
+        }
     }
 }
 
