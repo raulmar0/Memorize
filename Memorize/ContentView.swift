@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     
-//        [String] is the same type as Array<String>
     let emojis = ["👻","🎃","🕷️","😈","💀","🕸️","🧙‍♂️","🙀","👹","😱","☠️","🍭"]
     @State var cardCount = 4
     
@@ -25,11 +24,9 @@ struct ContentView: View {
     }
     
     var cards: some View {
-//        implicit return
         LazyVGrid (columns: [GridItem(), GridItem(), GridItem()]) {
-//            0..<4 is a range containing 0,1,2,3 | emojis.indices for the range
             ForEach(0..<cardCount, id: \.self) { index in
-                CardView(content: emojis[index]).aspectRatio(2/3, contentMode: .fill)
+                CardView(content: emojis[index]).aspectRatio(2/3, contentMode: .fit)
             }
         }
         .foregroundColor(.orange)
@@ -67,7 +64,6 @@ struct ContentView: View {
     ContentView()
 }
 
-// Views are immutable
 struct CardView: View {
     
     let content: String
