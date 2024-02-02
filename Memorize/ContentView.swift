@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+//        [String] is the same type as Array<String>
+    let emojis = ["👻","🎃","🕷️","😈"]
+    
     var body: some View {
         HStack {
-            CardView(isFaceUp: true)
-            CardView()
-            CardView()
-            CardView()
+//            0..<4 is a range containing 0,1,2,3
+            ForEach(emojis.indices, id: \.self) { index in
+                CardView(content: emojis[index])
+            }
         }
         .foregroundColor(.orange)
-        .imageScale(.small)
         .padding()
     }
 }
@@ -27,20 +30,13 @@ struct ContentView: View {
 
 // Views are immutable
 struct CardView: View {
-//    Temporary state, not actual logic
-    @State var isFaceUp: Bool = false
+    
+    let content: String
+    @State var isFaceUp = false
+    
     var body: some View {
-//        let is for constants
-//        let base: RoundedRectangle = RoundedRectangle(cornerRadius: 12)
-        let base = RoundedRectangle(cornerRadius: 12)
-          
-//        Trailing closure syntax
-//        ZStack(alignment: .top) {
-//            /*@START_MENU_TOKEN@*/Text("Placeholder")/*@END_MENU_TOKEN@*/
-//        })
-        
-//        Old fashioned
-        ZStack(content: {
+        ZStack{
+            let base = RoundedRectangle(cornerRadius: 12)
             if isFaceUp {
                 base.fill(.white)
                 base.strokeBorder(lineWidth: 2)
@@ -49,9 +45,8 @@ struct CardView: View {
                 base.fill()
             }
             
-        }).onTapGesture {
+        }.onTapGesture {
             isFaceUp.toggle()
-//            isFaceUp = !isFaceUp also works
         }
     }
 }
