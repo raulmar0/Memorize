@@ -28,6 +28,9 @@ struct ContentView: View {
             ForEach(0..<cardCount, id: \.self) { index in
                 CardView(content: emojis[index]).aspectRatio(2/3, contentMode: .fit)
             }
+//            ForEach(nameArr) { name in
+//                Text(name.value)
+//            }
         }
         .foregroundColor(.orange)
     }
@@ -54,6 +57,11 @@ struct ContentView: View {
     var cardRemover: some View {
         return cardCountAdjuster(by: -1, symbol: "rectangle.stack.badge.minus.fill")
     }
+    
+//    @ViewBuilder
+//    func cardRemover() -> some View {
+//        cardCountAdjuster(by: -1, symbol: "rectangle.stack.badge.minus.fill")
+//    }
     
     var cardAdder: some View {
         return cardCountAdjuster(by: +1, symbol: "rectangle.stack.badge.plus.fill")
@@ -85,5 +93,13 @@ struct CardView: View {
         }
     }
 }
+
+struct name: Identifiable {
+    var value: String
+    let id = UUID()
+}
+
+var nameArr: [name] = [name(value:"pepe"), name(value:"pancho")]
+
 
 
