@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Model
 struct MemoryGame<CardContent> {
     var cards: Array<Card>
     
@@ -19,6 +20,5 @@ struct MemoryGame<CardContent> {
         var isFaceUp: Bool
         var isMatched: Bool
         var content: CardContent
-        
     }
 }
