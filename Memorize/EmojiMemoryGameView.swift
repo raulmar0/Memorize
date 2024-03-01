@@ -18,13 +18,10 @@ struct EmojiMemoryGameView: View {
         VStack {
             cards
                 .animation(.bouncy, value: viewModel.cards)
-//                    .background(.red)
             Button("Shuffle") {
                 viewModel.shuffle()
             }
-//            .background(Color.blue)
         }
-//        .background(.yellow)
         .padding()
     }
     
@@ -41,8 +38,6 @@ struct EmojiMemoryGameView: View {
                     Text(card.id)
                 }
             }
-            
-//                    Text(card.id)
         }
         .foregroundColor(.orange)
         
