@@ -10,6 +10,7 @@ import SwiftUI
 // View
 
 struct EmojiMemoryGameView: View {
+    typealias Card = MemoryGame<String>.Card
     @ObservedObject var viewModel: EmojiMemoryGame // never equals when @ObservedObject
     
     let aspectRatio: CGFloat = 2/3
@@ -19,12 +20,28 @@ struct EmojiMemoryGameView: View {
         VStack {
             cards
                 .foregroundColor(viewModel.color)
-                .animation(.bouncy, value: viewModel.cards)
-            Button("Shuffle") {
+//                .animation(.bouncy, value: viewModel.cards)
+            HStack {
+                score
+                Spacer()
+                shuffle
+            }
+            .font(.largeTitle)
+        }
+        .padding()
+    }
+    
+    private var score: some View {
+        Text("Score: \(viewModel.score)")
+            .animation(nil)
+    }
+    
+    private var shuffle: some View {
+        Button("Shuffle") {
+            withAnimation(.easeInOut(duration: 2)) {
                 viewModel.shuffle()
             }
         }
-        .padding()
     }
     
     var cards: some View {
@@ -35,8 +52,11 @@ struct EmojiMemoryGameView: View {
                 VStack {
                     CardView(card)
                         .padding(spacing)
+                        .overlay(FlyingNumber(number: scoreChange(causedBy: card)))
                         .onTapGesture {
-                            viewModel.choose(card)
+                            withAnimation {
+                                viewModel.choose(card)
+                            }
                         }
 //                    Text(card.id)
                 }
@@ -47,6 +67,9 @@ struct EmojiMemoryGameView: View {
         
     }
     
+    private func scoreChanged(causedBy card: Card) -> Int {
+        return 0
+    }
     
     
 }
