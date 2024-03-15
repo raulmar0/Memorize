@@ -11,10 +11,12 @@ import SwiftUI
 // ViewModel
 // Aquí se crea
 class EmojiMemoryGame: ObservableObject {
+//   Not working
+    typealias Card = MemoryGame<String>.Card
     private static let emojis = ["👻","🎃","🕷️","😈","💀","🕸️","🧙‍♂️","🙀","👹","😱","☠️","🍭"] // EmojiMemoryGame.emojis in the global namespace
     
     private static func createMemoryGame() -> MemoryGame<String> {
-        return MemoryGame(numberOfPairsOfCards: 10) { pairIndex in
+        return MemoryGame(numberOfPairsOfCards: 2) { pairIndex in
             if emojis.indices.contains(pairIndex) {
                 return emojis[pairIndex]
             } else {
@@ -27,8 +29,12 @@ class EmojiMemoryGame: ObservableObject {
     
     
     
-    var cards: [MemoryGame<String>.Card] {
-        return model.cards
+    var cards: [Card] {
+        model.cards
+    }
+    
+    var color: Color {
+        .orange
     }
     
     // MARK: - Intents
@@ -37,7 +43,7 @@ class EmojiMemoryGame: ObservableObject {
         model.shuffle()
     }
 
-    func choose(_ card: MemoryGame<String>.Card) {
+    func choose(_ card: Card) {
         model.choose(card)
     }
 }
